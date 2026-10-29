@@ -1,4 +1,4 @@
-# AshareSignal Lab 一键演示（保留已有数据；-FreshDemo 创建独立新库）
+﻿# AshareSignal Lab 一键演示（保留已有数据；-FreshDemo 创建独立新库）
 [CmdletBinding()]
 param(
     [switch]$FreshDemo,

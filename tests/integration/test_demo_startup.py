@@ -69,3 +69,25 @@ def test_launcher_stops_when_dependency_sync_fails(tmp_path):
     assert result.returncode != 0
     assert b"23" in result.stderr
     assert b"[2/4]" not in result.stdout
+
+
+@pytest.mark.skipif(sys.platform != "win32", reason="Windows PowerShell legacy encoding")
+def test_launcher_parses_when_default_codepage_is_western():
+    """Simulate a non-Chinese Windows 5.1 reader without changing the OS locale."""
+    powershell = shutil.which("powershell")
+    if powershell is None:
+        pytest.skip("Windows PowerShell unavailable")
+    probe = r"""
+$stream = [IO.File]::OpenRead('scripts/demo.ps1')
+$reader = New-Object IO.StreamReader($stream, [Text.Encoding]::GetEncoding(1252), $true)
+try { $source = $reader.ReadToEnd() } finally { $reader.Dispose() }
+$tokens = $null
+$parseErrors = $null
+[void][Management.Automation.Language.Parser]::ParseInput($source, [ref]$tokens, [ref]$parseErrors)
+if ($parseErrors.Count -ne 0) { Write-Error ($parseErrors | Out-String); exit 1 }
+"""
+    result = subprocess.run(
+        [powershell, "-NoProfile", "-Command", probe],
+        cwd=ROOT, capture_output=True, timeout=30, check=False,
+    )
+    assert result.returncode == 0, result.stderr.decode(errors="replace")

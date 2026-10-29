@@ -18,3 +18,7 @@
 GitHub Actions配置Ubuntu/Windows两条路径，安装测试浏览器并先构建前端；另检查两条浏览器旅程必须实际执行且通过。具体云端结果以本仓库Actions运行记录为准。本地未单独验证Linux/macOS启动脚本。
 
 已知Starlette/AnyIO弃用提示、jieba转义提示和小样本NumPy警告保留，未通过屏蔽警告宣布无问题。真实LLM、真实财经语料泛化、真实价格反应、策略收益和容器部署不在本次已通过范围。
+
+## 英文Windows PowerShell兼容修复
+
+首次云端Ubuntu通过，Windows发现中文启动脚本在PowerShell 5.1英文默认代码页下解析失败。已在本机用CP1252默认读取与同一PowerShell解析器复现，保留失败前回归记录；启动脚本改为明确的UTF-8 BOM后，新增编码行为回归与原启动保护测试通过，共5项。没有修改测试断言来绕过错误。新增回归使完整收集数为383；云端Windows应执行383项，Ubuntu按平台跳过两项Windows专属检查。
