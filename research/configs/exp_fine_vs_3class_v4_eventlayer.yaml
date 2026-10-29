@@ -1,0 +1,23 @@
+# v4（预注册，2026-09-15，先于运行提交）：在 v3 全部字段不变的基础上开启
+# 事件层聚类兜底（event_layer_fallback，ADR-015）——检验 SimHash 误聚拆分后
+# 金标构成变化对 H1 判定的影响。seed/规模/切分/成本与 v3 完全一致；
+# 运行必须使用全新 SQLite 库（ADR-012/014，验收 demo_stats.market_data.n_new_bars==1440），
+# manifest 落 research/runs/ 只追加，运行后不得修改本配置。
+name: exp_fine_vs_3class_v4_eventlayer
+seed: 20260912
+n_events: 800
+n_days: 180
+alpha: 0.012
+provider: mock
+split_scheme: walk_forward
+folds: 3
+embargo_days: 2
+event_type_ablation: true
+event_layer_fallback: true
+horizons: [1, 2]
+costs:
+  commission_bps: 2.5
+  stamp_duty_bps: 5.0
+  slippage_bps: 10.0
+backtest_top_k: 3
+min_abs_signal: 0.05

@@ -1,0 +1,44 @@
+name: CI
+on:
+  push:
+    branches: [main]
+  pull_request:
+permissions:
+  contents: read
+jobs:
+  test:
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, windows-latest]
+    runs-on: ${{ matrix.os }}
+    env:
+      OPENBLAS_NUM_THREADS: '1'
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
+      - uses: astral-sh/setup-uv@94527f2e458b27549849d47d273a16bec83a01e9 # v7
+        with:
+          python-version: '3.13'
+          enable-cache: true
+      - uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7
+        with:
+          node-version: '24'
+          cache: npm
+          cache-dependency-path: apps/web/package-lock.json
+      - run: uv sync --frozen --group e2e --extra market
+      - run: uv run python -m playwright install --with-deps chromium
+      - name: Build frontend before browser tests
+        working-directory: apps/web
+        run: |
+          npm ci
+          npm run build
+      - run: uv run ruff check packages apps/api/src tests scripts
+      - run: uv run pytest tests -q -n 2 --basetemp=.pytest_tmp/ci --junitxml=output/ci-tests.xml
+      - name: Require both browser journeys to execute
+        shell: python
+        run: |
+          import xml.etree.ElementTree as ET
+          root = ET.parse('output/ci-tests.xml').getroot()
+          journeys = [c for c in root.iter('testcase') if 'test_e2e_ui' in c.get('classname', '')]
+          assert len(journeys) == 2, 'Browser journeys missing from test collection'
+          assert all(c.find('skipped') is None and c.find('failure') is None and c.find('error') is None for c in journeys), 'Browser journeys must pass, not skip'

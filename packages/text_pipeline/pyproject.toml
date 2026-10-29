@@ -1,0 +1,13 @@
+[project]
+name = "asg-text-pipeline"
+version = "0.1.0"
+description = "中文文本清洗、去重聚类、实体链接与时间对齐"
+requires-python = ">=3.12"
+dependencies = ["asg-domain"]
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/asg_text_pipeline"]

@@ -1,0 +1,424 @@
+{
+ "name": "eq_baseline_v1",
+ "config": {
+  "name": "eq_baseline_v1",
+  "seed": 20260907,
+  "n_events": 130,
+  "n_days": 180,
+  "alpha": 0.012,
+  "provider": "mock",
+  "folds": 3,
+  "embargo_days": 2,
+  "horizons": [
+   1,
+   2
+  ],
+  "costs": {
+   "slippage_bps": 10.0
+  },
+  "backtest_top_k": 3,
+  "min_abs_signal": 0.05,
+  "split_scheme": "walk_forward",
+  "kfold_splits": 5,
+  "event_type_ablation": true
+ },
+ "config_hash": "6ec5ff06bea61fdade892d72ca116df32bd9d7882309b8419db40359743ee888",
+ "seed": 20260907,
+ "provider_note": "mock",
+ "demo_stats": {
+  "market_data": {
+   "n_new_securities": 0,
+   "n_new_bars": 1440,
+   "n_days": 180
+  },
+  "ingest": {
+   "n_input": 161,
+   "n_ingested": 161,
+   "n_dupe_ingest": 0,
+   "n_texts": 161,
+   "n_clusters": 126,
+   "n_events": 126,
+   "n_quarantine_align": 0
+  },
+  "kappa": {
+   "direction": 0.8318,
+   "vs_expectation": 0.8,
+   "certainty": 0.7007
+  },
+  "n_gold": 111,
+  "n_adjudicated": 41,
+  "n_canonical": 111,
+  "generator_version": "synthetic_demo_v2_flavor"
+ },
+ "n_gold_strict": 98,
+ "n_oos_events": 72,
+ "model_scores": {
+  "majority": {
+   "n_oos": 72,
+   "direction_only": {
+    "accuracy": 0.4861,
+    "macro_f1": 0.2181,
+    "labels_present": [
+     "bearish",
+     "bullish",
+     "neutral"
+    ]
+   },
+   "fine_grained": {
+    "direction": 0.2181,
+    "vs_expectation": 0.1845,
+    "certainty": 0.2827
+   }
+  },
+  "lexicon": {
+   "n_oos": 72,
+   "direction_only": {
+    "accuracy": 0.7222,
+    "macro_f1": 0.7513,
+    "labels_present": [
+     "bearish",
+     "bullish",
+     "neutral"
+    ]
+   },
+   "fine_grained": {
+    "direction": 0.7513,
+    "vs_expectation": 0.609,
+    "certainty": 0.4917
+   }
+  },
+  "sklearn": {
+   "n_oos": 72,
+   "direction_only": {
+    "accuracy": 0.8333,
+    "macro_f1": 0.8172,
+    "labels_present": [
+     "bearish",
+     "bullish",
+     "neutral"
+    ]
+   },
+   "fine_grained": {
+    "direction": 0.8172,
+    "vs_expectation": 0.8744,
+    "certainty": 0.9307
+   }
+  },
+  "mock_llm": {
+   "n_oos": 72,
+   "direction_only": {
+    "accuracy": 0.7222,
+    "macro_f1": 0.7513,
+    "labels_present": [
+     "bearish",
+     "bullish",
+     "neutral"
+    ]
+   },
+   "fine_grained": {
+    "direction": 0.7513,
+    "vs_expectation": 0.609,
+    "certainty": 0.4917
+   }
+  }
+ },
+ "ic_gold_fine_vs_dir3": {
+  "n": 98,
+  "delta_ic": 0.024248,
+  "ci95_low": -0.039148,
+  "ci95_high": 0.09616,
+  "h1_supported": false
+ },
+ "ic_pred_fine_vs_dir3": {
+  "n": 98,
+  "delta_ic": -0.030541,
+  "ci95_low": -0.064708,
+  "ci95_high": -0.002514,
+  "h1_supported": false
+ },
+ "ic_decay_fine_gold": [
+  {
+   "horizon": 1,
+   "n": 98,
+   "ic": 0.351915,
+   "t_stat": 42.019,
+   "ci95_low": 0.184242,
+   "ci95_high": 0.509676
+  },
+  {
+   "horizon": 2,
+   "n": 98,
+   "ic": 0.359032,
+   "t_stat": 41.133,
+   "ci95_low": 0.18649,
+   "ci95_high": 0.522013
+  }
+ ],
+ "ic_by_fold_gold": [
+  {
+   "fold": 0,
+   "test": "2026-04-13~2026-06-11",
+   "n": 21,
+   "ic_fine": 0.340423,
+   "ic_dir3": 0.293553
+  },
+  {
+   "fold": 1,
+   "test": "2026-06-16~2026-08-03",
+   "n": 24,
+   "ic_fine": 0.403713,
+   "ic_dir3": 0.381582
+  },
+  {
+   "fold": 2,
+   "test": "2026-08-06~2026-09-18",
+   "n": 27,
+   "ic_fine": 0.364549,
+   "ic_dir3": 0.38734
+  }
+ ],
+ "split_scheme": "walk_forward",
+ "folds_used": {
+  "ids": [
+   0,
+   1,
+   2
+  ],
+  "skipped_empty": []
+ },
+ "ablation_gold_exploratory": {
+  "drop_certainty": {
+   "n": 98,
+   "delta_ic": 0.021414,
+   "ci95_low": -0.024711,
+   "ci95_high": 0.067385,
+   "h1_supported": false
+  },
+  "drop_vs": {
+   "n": 98,
+   "delta_ic": -0.006088,
+   "ci95_low": -0.041353,
+   "ci95_high": 0.026939,
+   "h1_supported": false
+  }
+ },
+ "ic_by_event_type_gold_exploratory": {
+  "earnings": {
+   "n": 37,
+   "ic_fine_vs_dir3": {
+    "n": 37,
+    "delta_ic": -0.009392,
+    "ci95_low": -0.147306,
+    "ci95_high": 0.122773,
+    "h1_supported": false
+   },
+   "abnormal_fine": {
+    "n": 37,
+    "mean_abnormal": 0.008892,
+    "std_abnormal": 0.015179,
+    "t_stat": 3.563,
+    "ci95_low": 0.003928,
+    "ci95_high": 0.013551
+   }
+  },
+  "litigation": {
+   "n": 6,
+   "ic_fine_vs_dir3": {
+    "n": 6,
+    "delta_ic": null,
+    "ci95_low": null,
+    "ci95_high": null,
+    "h1_supported": false
+   },
+   "abnormal_fine": {
+    "n": 6,
+    "mean_abnormal": -0.009304,
+    "std_abnormal": 0.01359,
+    "t_stat": -1.677,
+    "ci95_low": -0.019275,
+    "ci95_high": 0.000148
+   }
+  },
+  "macro_policy": {
+   "n": 10,
+   "ic_fine_vs_dir3": {
+    "n": 10,
+    "delta_ic": 0.0,
+    "ci95_low": 0.0,
+    "ci95_high": 0.0,
+    "h1_supported": false
+   },
+   "abnormal_fine": {
+    "n": 10,
+    "mean_abnormal": 0.001402,
+    "std_abnormal": 0.016099,
+    "t_stat": 0.275,
+    "ci95_low": -0.007373,
+    "ci95_high": 0.010966
+   }
+  },
+  "orders": {
+   "n": 17,
+   "ic_fine_vs_dir3": {
+    "n": 17,
+    "delta_ic": -0.003299,
+    "ci95_low": -0.14871,
+    "ci95_high": 0.135603,
+    "h1_supported": false
+   },
+   "abnormal_fine": {
+    "n": 17,
+    "mean_abnormal": 0.006986,
+    "std_abnormal": 0.017184,
+    "t_stat": 1.676,
+    "ci95_low": -0.000671,
+    "ci95_high": 0.0149
+   }
+  },
+  "other": {
+   "n": 8,
+   "ic_fine_vs_dir3": {
+    "n": 8,
+    "delta_ic": null,
+    "ci95_low": null,
+    "ci95_high": null,
+    "h1_supported": false
+   },
+   "abnormal_fine": {
+    "n": 8,
+    "mean_abnormal": -0.001975,
+    "std_abnormal": 0.022526,
+    "t_stat": -0.248,
+    "ci95_low": -0.017304,
+    "ci95_high": 0.011694
+   }
+  },
+  "product": {
+   "n": 7,
+   "ic_fine_vs_dir3": {
+    "n": 7,
+    "delta_ic": 0.0,
+    "ci95_low": null,
+    "ci95_high": null,
+    "h1_supported": false
+   },
+   "abnormal_fine": {
+    "n": 7,
+    "mean_abnormal": -0.006756,
+    "std_abnormal": 0.014713,
+    "t_stat": -1.215,
+    "ci95_low": -0.017352,
+    "ci95_high": 0.002858
+   }
+  },
+  "shareholder": {
+   "n": 8,
+   "ic_fine_vs_dir3": {
+    "n": 8,
+    "delta_ic": 0.0,
+    "ci95_low": null,
+    "ci95_high": null,
+    "h1_supported": false
+   },
+   "abnormal_fine": {
+    "n": 8,
+    "mean_abnormal": 0.004547,
+    "std_abnormal": 0.012447,
+    "t_stat": 1.033,
+    "ci95_low": -0.003016,
+    "ci95_high": 0.01276
+   }
+  }
+ },
+ "cost_sensitivity_backtest": [
+  {
+   "slippage_bps": 5.0,
+   "n_days": 20,
+   "total_return": 0.393416,
+   "sharpe": 12.234,
+   "max_drawdown": 0.025049,
+   "win_rate_days": 0.85,
+   "turnover_per_day": 1.0,
+   "n_fills": 20,
+   "costs_total": 13491.6
+  },
+  {
+   "slippage_bps": 10.0,
+   "n_days": 20,
+   "total_return": 0.3388,
+   "sharpe": 10.79,
+   "max_drawdown": 0.027002,
+   "win_rate_days": 0.75,
+   "turnover_per_day": 1.0,
+   "n_fills": 20,
+   "costs_total": 20209.73
+  },
+  {
+   "slippage_bps": 20.0,
+   "n_days": 20,
+   "total_return": 0.235861,
+   "sharpe": 7.891,
+   "max_drawdown": 0.030885,
+   "win_rate_days": 0.7,
+   "turnover_per_day": 1.0,
+   "n_fills": 20,
+   "costs_total": 33625.51
+  },
+  {
+   "slippage_bps": 50.0,
+   "n_days": 20,
+   "total_return": -0.027872,
+   "sharpe": -0.875,
+   "max_drawdown": 0.09554,
+   "win_rate_days": 0.45,
+   "turnover_per_day": 1.0,
+   "n_fills": 20,
+   "costs_total": 73711.25
+  }
+ ],
+ "abnormal_by_certainty_gold": {
+  "certain": {
+   "n": 73,
+   "mean_abnormal": 0.005095,
+   "std_abnormal": 0.016577,
+   "t_stat": 2.626,
+   "ci95_low": 0.001396,
+   "ci95_high": 0.00881
+  },
+  "conditional": {
+   "n": 4,
+   "mean_abnormal": -0.008894,
+   "std_abnormal": 0.019077,
+   "t_stat": -0.932,
+   "ci95_low": -0.024622,
+   "ci95_high": 0.006834
+  },
+  "speculative": {
+   "n": 21,
+   "mean_abnormal": 0.001969,
+   "std_abnormal": 0.015616,
+   "t_stat": 0.578,
+   "ci95_low": -0.004521,
+   "ci95_high": 0.008302
+  }
+ },
+ "backtest": {
+  "metrics": {
+   "n_days": 20,
+   "total_return": 0.3388,
+   "sharpe": 10.79,
+   "max_drawdown": 0.027002,
+   "win_rate_days": 0.75,
+   "turnover_per_day": 1.0,
+   "n_fills": 20,
+   "costs_total": 20209.73
+  },
+  "rejections": {},
+  "n_intents": 20
+ },
+ "h1_verdict": {
+  "supported_on_gold": false,
+  "supported_on_predictions": false,
+  "note": "判定标准见 RESEARCH_PROTOCOL §5；合成数据上仅支持方法验证结论"
+ }
+}

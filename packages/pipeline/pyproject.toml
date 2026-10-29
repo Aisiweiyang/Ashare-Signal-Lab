@@ -1,0 +1,22 @@
+[project]
+name = "asg-pipeline"
+version = "0.1.0"
+description = "端到端研究流水线：摄取/清洗对齐/金标/预测/信号/回测/实验记录"
+requires-python = ">=3.12"
+dependencies = [
+    "asg-domain",
+    "asg-text-pipeline",
+    "asg-connectors",
+    "asg-labeling",
+    "asg-models",
+    "asg-event-study",
+    "asg-backtest",
+    "pyyaml>=6.0",
+]
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/asg_pipeline"]

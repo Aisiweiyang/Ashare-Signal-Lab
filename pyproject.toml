@@ -1,0 +1,88 @@
+[project]
+name = "ashare-signal-lab"
+version = "1.0.0"
+description = "AshareSignal Lab —— 面向中文 A 股的细粒度金融情绪分析与短期市场反应研究系统（研究用途，非投资建议）"
+readme = "README.md"
+requires-python = ">=3.12"
+license = { text = "MIT" }
+authors = [{ name = "Aisiweiyang" }]
+dependencies = [
+    "asg-domain",
+    "asg-text-pipeline",
+    "asg-connectors",
+    "asg-labeling",
+    "asg-models",
+    "asg-event-study",
+    "asg-backtest",
+    "asg-pipeline",
+    "asg-api",
+]
+
+[tool.uv.workspace]
+members = ["packages/*", "apps/api"]
+
+[tool.uv.sources]
+asg-domain = { workspace = true }
+asg-text-pipeline = { workspace = true }
+asg-connectors = { workspace = true }
+asg-labeling = { workspace = true }
+asg-models = { workspace = true }
+asg-event-study = { workspace = true }
+asg-backtest = { workspace = true }
+asg-pipeline = { workspace = true }
+asg-api = { workspace = true }
+
+[dependency-groups]
+dev = [
+    "pytest>=8",
+    "pytest-cov>=5",
+    "ruff>=0.8",
+    "mypy>=1.13",
+    "pre-commit>=4",
+    "httpx>=0.27",
+    "pytest-xdist>=3.6",
+]
+e2e = [
+    "playwright>=1.49",
+]
+
+[project.optional-dependencies]
+# 可选行情适配器：许可证核验见 docs/OSS_EVALUATION.md；未安装时系统走 fixture 路径。
+# 必须是 extra（而非 dependency-group）：代码降级提示与文档均为 `uv sync --extra market`
+market = [
+    "akshare>=1.16",
+]
+
+[tool.ruff]
+line-length = 100
+target-version = "py312"
+src = ["packages", "apps", "tests"]
+
+[tool.ruff.lint]
+select = ["E", "F", "W", "I", "N", "UP", "B", "C4", "SIM", "RUF"]
+# 中文项目：RUF001/002/003 把中文全角标点当「歧义 Unicode」误报，显式关闭
+ignore = ["E501", "RUF001", "RUF002", "RUF003", "B008"]
+
+[tool.ruff.lint.per-file-ignores]
+# FastAPI 路由的 Depends(...) 默认参数是框架惯例（B008 已全局忽略）
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-q --strict-markers"
+markers = [
+    "integration: 跨模块集成测试",
+    "security: 安全测试",
+    "leakage: 前视偏差/泄漏防御测试",
+    "e2e: 端到端测试",
+    "slow: 慢速测试",
+]
+filterwarnings = ["error::DeprecationWarning:asg_*"]
+
+[tool.coverage.run]
+source = ["packages", "apps/api/src"]
+omit = ["*/tests/*", "*/migrations/*"]
+
+[tool.mypy]
+python_version = "3.12"
+ignore_missing_imports = true
+check_untyped_defs = true

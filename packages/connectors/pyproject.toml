@@ -1,0 +1,13 @@
+[project]
+name = "asg-connectors"
+version = "0.1.0"
+description = "数据源适配器：合成数据、CSV 导入、fixture、可选 akshare"
+requires-python = ">=3.12"
+dependencies = ["asg-domain"]
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/asg_connectors"]

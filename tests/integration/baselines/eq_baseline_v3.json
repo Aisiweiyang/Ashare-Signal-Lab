@@ -1,0 +1,110 @@
+{
+  "config_hash": "197dbe2da926ba7c0ae4234150e8bc451ccbcde51415335ecca61f1133822b9a",
+  "seed": 20260912,
+  "name": "exp_fine_vs_3class_v3_scale800",
+  "split_scheme": "walk_forward",
+  "folds_used": {
+    "ids": [
+      0,
+      1,
+      2
+    ],
+    "skipped_empty": []
+  },
+  "n_gold_strict": 604,
+  "n_oos_events": 431,
+  "provider_note": "mock",
+  "h1_verdict": {
+    "supported_on_gold": true,
+    "supported_on_predictions": false,
+    "note": "判定标准见 RESEARCH_PROTOCOL §5；合成数据上仅支持方法验证结论"
+  },
+  "ic_by_fold_gold": [
+    {
+      "fold": 0,
+      "test": "2026-03-26~2026-05-26",
+      "n": 156,
+      "ic_fine": 0.338079,
+      "ic_dir3": 0.297196
+    },
+    {
+      "fold": 1,
+      "test": "2026-05-29~2026-07-22",
+      "n": 145,
+      "ic_fine": 0.29211,
+      "ic_dir3": 0.255149
+    },
+    {
+      "fold": 2,
+      "test": "2026-07-27~2026-09-18",
+      "n": 130,
+      "ic_fine": 0.230627,
+      "ic_dir3": 0.175893
+    }
+  ],
+  "ic_gold_fine_vs_dir3": {
+    "n": 597,
+    "delta_ic": 0.02964
+  },
+  "ic_pred_fine_vs_dir3": {
+    "n": 597
+  },
+  "demo_stats": {
+    "ingest": {
+      "n_input": 1083,
+      "n_ingested": 1083,
+      "n_dupe_ingest": 0,
+      "n_texts": 1083,
+      "n_clusters": 698,
+      "n_events": 698,
+      "n_quarantine_align": 0
+    },
+    "n_gold": 662,
+    "n_adjudicated": 249,
+    "n_canonical": 662,
+    "generator_version": "synthetic_demo_v2_flavor"
+  },
+  "ic_by_event_type_gold_exploratory": {
+    "earnings": {
+      "n": 177
+    },
+    "litigation": {
+      "n": 55
+    },
+    "ma": {
+      "n": 24
+    },
+    "macro_policy": {
+      "n": 71
+    },
+    "orders": {
+      "n": 60
+    },
+    "other": {
+      "n": 53
+    },
+    "product": {
+      "n": 51
+    },
+    "regulatory": {
+      "n": 35
+    },
+    "shareholder": {
+      "n": 78
+    }
+  },
+  "model_scores": {
+    "majority": {
+      "n_oos": 431
+    },
+    "lexicon": {
+      "n_oos": 431
+    },
+    "sklearn": {
+      "n_oos": 431
+    },
+    "mock_llm": {
+      "n_oos": 431
+    }
+  }
+}

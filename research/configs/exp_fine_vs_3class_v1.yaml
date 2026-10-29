@@ -1,0 +1,16 @@
+# 全量实验：细粒度 vs 三分类（预注册配置，RESEARCH_PROTOCOL v1.0）
+name: exp_fine_vs_3class_v1
+seed: 20260907
+n_events: 130
+n_days: 180
+alpha: 0.012          # 合成反应强度（数据卡见 docs/DATA_CARD.md）
+provider: mock        # mock | llm（llm 需配置 ASG_LLM_* 环境变量）
+folds: 3
+embargo_days: 2
+horizons: [1, 2]      # T+1 为主，T+2 对照
+costs:
+  commission_bps: 2.5
+  stamp_duty_bps: 5.0
+  slippage_bps: 10.0  # 敏感性分析另行 5/20/50
+backtest_top_k: 3
+min_abs_signal: 0.05

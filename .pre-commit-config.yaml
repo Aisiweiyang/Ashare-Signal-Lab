@@ -1,0 +1,27 @@
+# AshareSignal Lab pre-commit 钩子
+# 安装: uv run pre-commit install
+repos:
+  - repo: https://github.com/astral-sh/ruff-pre-commit
+    rev: v0.8.4
+    hooks:
+      - id: ruff
+        args: [--fix]
+        files: ^(packages|apps/api/src|tests)/.*\.py$
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v5.0.0
+    hooks:
+      - id: check-yaml
+        files: \.(yaml|yml)$
+      - id: check-merge-conflict
+      - id: detect-private-key
+        name: 密钥泄漏检查（secret scanning 基础层）
+      - id: end-of-file-fixer
+        files: ^(packages|apps/api/src|docs|research/configs)/.*\.(py|md|ya?ml)$
+  - repo: local
+    hooks:
+      - id: no-real-trading
+        name: 禁止启用真实交易（硬约束审计）
+        entry: "ASG_ALLOW_REAL_TRADING\\s*=\\s*true"
+        language: pygrep
+        files: \.(py|ya?ml|env.*)$
+        exclude: ^\.env\.example$

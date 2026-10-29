@@ -1,0 +1,18 @@
+# Gold-label scaling re-estimation: v1 methodology with a larger synthetic sample.
+name: exp_fine_vs_3class_v3_scale800
+seed: 20260912
+n_events: 800
+n_days: 180
+alpha: 0.012
+provider: mock
+split_scheme: walk_forward
+folds: 3
+embargo_days: 2
+event_type_ablation: true
+horizons: [1, 2]
+costs:
+  commission_bps: 2.5
+  stamp_duty_bps: 5.0
+  slippage_bps: 10.0
+backtest_top_k: 3
+min_abs_signal: 0.05

@@ -1,0 +1,23 @@
+# 下一阶段对照实验（v1 预注册配置保持不动，见 exp_fine_vs_3class_v1.yaml）
+# 变更点：
+# - split_scheme: purged_kfold —— RESEARCH_PROTOCOL §6 预留的 purged/embargo K-fold 对照
+#   （测试窗每侧 buffer = embargo_days + 2×horizon 日历日，含簇清除；见 splits.purge_buffer_days）；
+# - event_type_ablation: true —— 分事件类型的 IC 与异常收益分组（exploratory，n≥5 才报告）。
+# 对照解读：与 v1（walk-forward）结论一致 → 时间稳健性证据；不一致 → 如实报告切分敏感性。
+name: exp_fine_vs_3class_v2_purgedkfold
+seed: 20260907
+n_events: 130
+n_days: 180
+alpha: 0.012          # 合成反应强度（与 v1 相同，保证可比）
+provider: mock
+split_scheme: purged_kfold
+kfold_splits: 5
+embargo_days: 2
+event_type_ablation: true
+horizons: [1, 2]
+costs:
+  commission_bps: 2.5
+  stamp_duty_bps: 5.0
+  slippage_bps: 10.0
+backtest_top_k: 3
+min_abs_signal: 0.05
