@@ -1,4 +1,4 @@
-# AshareSignal Lab · A股信号实验室
+# Ashare-Signal-Lab · A股信号实验室
 
 **作者：[Aisiweiyang](https://github.com/Aisiweiyang)**。项目源码与自建用例版权归作者所有，按[MIT许可证](LICENSE)开放使用；第三方组件保留各自版权及许可。作者信息见[AUTHORS.md](AUTHORS.md)。
 
@@ -20,8 +20,8 @@
 需要 Python 3.13、uv、Node.js 24（含npm）。先安装这些工具，再执行：
 
 ```powershell
-git clone https://github.com/Aisiweiyang/ashare-signal-lab-open.git
-cd ashare-signal-lab-open
+git clone https://github.com/Aisiweiyang/Ashare-Signal-Lab.git
+cd Ashare-Signal-Lab
 powershell -ExecutionPolicy Bypass -File scripts/demo.ps1
 ```
 
